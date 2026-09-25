@@ -11,7 +11,7 @@ from forecasting import forecast, stockout, reorder
 router = APIRouter(prefix = "/forecasts", tags = ["Forecasts"])
 
 @router.post("/product/{product_id}")
-async def generate(product_id:int, db: Session = Depends(get_db)):
+async def generate(product_id: UUID, db: AsyncSession = Depends(get_db)):
   result = await db.execute(select(Product).where(Product.id == product_id))
   product = result.scalar_one_or_none()
 
@@ -74,7 +74,7 @@ async def generate(product_id:int, db: Session = Depends(get_db)):
   return result
 
 @router.get("/")
-async def get_forecasts(product_id: UUID, db: AsyncSession = Depends(get_db)):
+async def get_forecasts(db: AsyncSession = Depends(get_db)):
   query = select(ForeCast).order_by(ForeCast.created_at.desc())
   db_result = await db.execute(query)
   return db_result.scalars().all()
