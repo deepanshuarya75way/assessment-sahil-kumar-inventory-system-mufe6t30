@@ -15,7 +15,7 @@ from sqlalchemy.sql import func
 
 from database import Base
 
-# from datetime import datetime
+from datetime import datetime
 
 class Product(Base):
     __tablename__ = "products"
@@ -138,18 +138,12 @@ class OrderItem(Base):
 class ForeCast(Base):
     __tablename__ = "forecasts"
 
-    id = Column(
-        UUID(as_uuid=True),
-        nullable=False,
-        index=True,
-        primary_key= True,
-        editable = False
-    )
-    product_id = Column(Integer, ForeignKey("products.id"))
+    id = Column(UUID(as_uuid=True),nullable=False,index=True,primary_key= True,editable = False),
+    product_id = Column(Integer, ForeignKey("products.id")),
     daily_demand = Column(Float),
     stockout_date = Column(Date, nullabl=True),
     reorder_quantity = Column(Integer),
     confidence = Column(String),
     history_start = Column(Date),
     history_end = Column(Date),
-    created_at = Column(DateTime, default = DateTime.now)
+    created_at = Column(DateTime, default = datetime.utcnow)
