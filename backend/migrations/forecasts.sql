@@ -1,6 +1,6 @@
 CREATE TABLE IF NOT EXISTS  forecasts(
   id SERIAL PRIMARY KEY,
-  product_id  INTEGER REFERENCES products(id) ON DELETE CASCADE,
+  product_id  UUID NOT NULL REFERENCES products(id) ON DELETE CASCADE,
   daily_demand  FLOAT NOT NULL,
   stockout_date DATE,
   reorder_quantity INTEGER NOT NULL,
