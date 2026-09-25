@@ -3,7 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 import os
 
-from routers import products, customers, orders
+from routers import products, customers, orders, forecasts
+from routers.forecasts import router as forecast_router
 
 app = FastAPI(
     title="Inventory & Order Management API",
@@ -23,6 +24,7 @@ app.add_middleware(
 app.include_router(products.router, prefix="/products", tags=["products"])
 app.include_router(customers.router, prefix="/customers", tags=["customers"])
 app.include_router(orders.router, prefix="/orders", tags=["orders"])
+app.include_router(forecast_router)
 
 
 @app.get("/")

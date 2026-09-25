@@ -10,6 +10,8 @@ import Orders from './pages/Orders';
 import CreateOrder from './pages/CreateOrder';
 import OrderDetail from './pages/OrderDetail';
 
+import Forecasts from './pages/Forecasts';
+
 function App() {
   return (
     <ThemeProvider>
@@ -23,6 +25,7 @@ function App() {
               <Route path="/orders" element={<Orders />} />
               <Route path="/orders/new" element={<CreateOrder />} />
               <Route path="/orders/:id" element={<OrderDetail />} />
+              <Route path = "/forecasts" element={<Forecasts />}/>
             </Routes>
           </Layout>
         </BrowserRouter>
