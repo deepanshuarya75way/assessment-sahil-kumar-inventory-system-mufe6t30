@@ -1,6 +1,8 @@
 from datetime import date, timedelta
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from database import get_db
 from models import Product, Order, OrderItem, ForeCast
@@ -22,7 +24,7 @@ def generate(product_id:int, db: Session = Depends(get_db)):
     db.query(Order, OrderItem)
     .join(OrderItem,OrderItem.order_id == Order.id)
     .filter(OrderItem.product_id==product_id,
-            Order.status = "confirmed",
+            Order.status == "confirmed",
             Order.created_at >= start
             ).all()
   )
@@ -61,5 +63,7 @@ def generate(product_id:int, db: Session = Depends(get_db)):
   return result
 
 @router.get("/")
-def get_forecasts(db: Session = Depends(get_db)):
-  return db.query(Forecast).order_by(Forecast.created_at.desc()).all()
+async def get_forecasts(db: AsyncSession = Depends(get_db)):
+  query = select(ForeCast).order_by(ForeCast.created_at.desc())
+  db_result = await db.execute(query)
+  return db_result.scalars().all()
