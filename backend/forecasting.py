@@ -12,7 +12,7 @@ def forecast(demand):
 
 
 def stockout(stock, daily):
-  if stockk<=0:
+  if stock<=0:
     return None
   return date.today() + timedelta(days = max(0, ceil(stock/daily)))
 
