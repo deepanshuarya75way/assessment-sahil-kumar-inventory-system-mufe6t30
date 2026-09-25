@@ -14,7 +14,7 @@ def forecast(demand):
 def stockout(stock, daily):
   if sotck<=0:
     return None
-  return date.today() + timedelta(days = max(0, ceil(stock/daily)-1))
+  return date.today() + timedelta(days = max(0, ceil(stock/daily)))
 
 def reorder(stock , daily, lead = 7, safety = 3):
   return max(0, ceil(daily*(lead+safety)-stock))
