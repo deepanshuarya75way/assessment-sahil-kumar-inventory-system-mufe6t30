@@ -7,6 +7,7 @@ const navItems = [
   { to: '/products', icon: Package, label: 'Products', color: '#34d399' },
   { to: '/customers', icon: Users, label: 'Customers', color: '#f472b6' },
   { to: '/orders', icon: ShoppingCart, label: 'Orders', color: '#fb923c' },
+  { to: '/forecasts', icon: Package, label: 'Forecasts', color: '#818cf8'}
 ];
 
 export default function Sidebar({ onClose }) {
