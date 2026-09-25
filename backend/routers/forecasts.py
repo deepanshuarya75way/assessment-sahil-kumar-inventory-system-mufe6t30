@@ -30,6 +30,8 @@ async def generate(product_id: UUID, db: AsyncSession = Depends(get_db)):
   #           ).all()
   # )
 
+  
+
   result = await db.execute(
     select(Order, OrderItem)
     .join(OrderItem,OrderItem.order_id == Order.id)

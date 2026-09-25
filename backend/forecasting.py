@@ -6,7 +6,7 @@ def forecast(demand):
     return 0, "uncertain"
 
   nz = [x for x in demand if x]
-  if len(nz) / len(demand) <0.5:
+  if len(nz) / len(demand) < 0.5:
     return sum(nz) / len(demand), "medium"
   return sum(demand[-7:]) / min(7, len(demand)), "high"
 
@@ -15,6 +15,7 @@ def stockout(stock, daily):
   if stock<=0 or daily<=0:
     return None
   return date.today() + timedelta(days = math.ceil(stock/daily))
+  
 
 def reorder(stock , daily, lead = 7, safety = 3):
   if daily<=0:
