@@ -141,7 +141,7 @@ class ForeCast(Base):
     __tablename__ = "forecasts"
 
     id = Column(Integer, primary_key = True)
-    product_id = Column(Integer, ForeignKey("products.id"))
+    product_id = Column(UUID(as_uuid=True),ForeignKey("products.id",ondelete="CASCADE"),nullable=False)
     daily_demand = Column(Float)
     stockout_date = Column(Date, nullable=True)
     reorder_quantity = Column(Integer)

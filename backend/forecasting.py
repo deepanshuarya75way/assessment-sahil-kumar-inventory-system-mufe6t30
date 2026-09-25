@@ -1,5 +1,6 @@
 from datetime import datetime, date, timedelta
 import math
+from math import ceil
 
 def forecast(demand):
   if len(demand) < 14 or sum(x>0 for x in demand) < 3:
@@ -12,9 +13,10 @@ def forecast(demand):
 
 
 def stockout(stock, daily):
-  if stock<=0:
+  if stock<=0 or daily<=0:
     return None
-  return date.today() + timedelta(days = max(0, ceil(stock/daily)))
+  return date.today() + timedelta(days = math.ceil(stock/daily))
 
 def reorder(stock , daily, lead = 7, safety = 3):
-  return max(0, ceil(daily*(lead+safety)-stock))
+    
+  return max(0, math.ceil(daily*(lead+safety)-stock))
