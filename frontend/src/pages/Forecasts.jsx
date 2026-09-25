@@ -4,7 +4,7 @@ import { getForecasts } from "../api/forecasts";
 export default function Forecasts(){
   const [data, setData] = useState([]);
   useEffect(() => {
-    getForecasts().then(setData);
+    getForecasts().then(setData).catch(err => console.error(err));
   },[]);
 
   return (
